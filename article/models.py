@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Model for an article Author, stores detail about the Author
 class Author(models.Model):
@@ -12,7 +13,7 @@ class Author(models.Model):
 class Article(models.Model):
     headline = models.CharField(max_length=255, default='Default headline')
     subheading = models.TextField(default='Default subheading')
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default=timezone.now)
     author = models.ManyToManyField(Author)
     #id = models.IntegerField(primary_key=True, Unique=True)
 

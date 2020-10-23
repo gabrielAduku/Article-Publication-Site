@@ -14,19 +14,23 @@
 {% endblock %}
 
 {% block article-content %}
-  <h2 class="my-3" id="articleList">All Articles</h2>
+<div id="articleList">
+  <h2 class="my-3">All Articles</h2>
     {% for article in articles %}
-    <div class="row my-3">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title"> {{ article.headline }} </h4>
-            <h6 class="card-text"> {{ article.subheading}} </h6>
-            <p> Published {{ article.date }} </p>
-            <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
+    <div name="article" data-id="{{ article.id }}">
+      <div class="row my-3">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title"> {{ article.headline }} </h4>
+              <h6 class="card-text"> {{ article.subheading}} </h6>
+              <p class="card-text"> Published {{ article.date }} </p>
+              <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
     {% endfor %}
+</div>
 {% endblock %}

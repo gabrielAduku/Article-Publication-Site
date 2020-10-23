@@ -5,11 +5,12 @@ from .models import *
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ['headline', 'subheading']
+        fields = ['headline', 'subheading', 'date']
 
         widgets = {
             'headline' : forms.TextInput(attrs={'class': 'form-control'}),
-            'subheading' : forms.TextInput(attrs={'class': 'form-control'})
+            'subheading' : forms.TextInput(attrs={'class': 'form-control'}),
+            'date' : forms.TextInput(attrs={'class': 'form-control'}),
         }
     #author = forms.ModelMultipleChoiceField(queryset=Author.objects.all(), widget=forms.CheckboxSelectMultiple)
 

@@ -20,3 +20,9 @@ class ArticleList(View):
             article = form.save()
             return JsonResponse({'article': model_to_dict(article)}, status=200)
         return redirect('article_list_url')
+
+class ArticleDelete(View):
+    def post(self, request, id):
+        article = Article.objects.get(pk=id)
+        article.delete()
+        return JsonResponse({'deleted' : 'successful'}, status=200)
