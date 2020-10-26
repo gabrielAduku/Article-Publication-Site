@@ -50,9 +50,9 @@ function submitForm()
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title"> `+ data.article.headline +` </h4>
-                  <h6 class="card-text"> ` + data.article.subheading + ` </h6>
-                  <p class="card-text"> Published ` + data.article.date + `</p>
+                  <h4 class="card-title" name="headline"> `+ data.article.headline +` </h4>
+                  <h6 class="card-text" name="subheading"> ` + data.article.subheading + ` </h6>
+                  <p class="card-text" name="date"> Published ` + data.article.date + `</p>
                   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
 
                   <!-- Modal Trigger -->
@@ -138,13 +138,12 @@ function finishEdit()
           var subheadingEl = currentlyEditing.find('h6[name=subheading]');
           var dateEl = currentlyEditing.find('p[name=date]');
 
-          console.log(headlineEl);
+          console.log(currentlyEditing);
 
           headlineEl.html(headline);
           subheadingEl.html(subheading);
           dateEl.html(date);
 
-          console.log(headlineEl);
       }
       else
       {
