@@ -6,7 +6,7 @@
     <h5 class="card-title">Create an Article</h5>
     <form class="form-group" method="post" id="createArticleForm">
       {% csrf_token %}
-      {{ form }}
+      {{ articleForm }}
       <button type="button" class = "btn btn-outline-success my-3" id="createButton">Create</button>
     </form>
   </div>
@@ -14,23 +14,50 @@
 {% endblock %}
 
 {% block article-content %}
+<!-- Bootstrap Modal -->
+<div id="editModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Article</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Form -->
+        <form class="form-group" method="post" id="editArticleForm">
+          {% csrf_token %}
+          {{ editForm }}
+          <button type="button" class = "btn btn-outline-success my-3" id="finishEditButton">Finish</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="articleList">
   <h2 class="my-3">All Articles</h2>
-    {% for article in articles %}
-    <div name="article" data-id="{{ article.id }}">
-      <div class="row my-3">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title"> {{ article.headline }} </h4>
-              <h6 class="card-text"> {{ article.subheading}} </h6>
-              <p class="card-text"> Published {{ article.date }} </p>
-              <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
-            </div>
+  {% for article in articles %}
+  <!-- Article -->
+  <div name="article" data-id="{{ article.id }}">
+    <div class="row my-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title" name="headline"> {{ article.headline }} </h4>
+            <h6 class="card-text" name="subheading"> {{ article.subheading}} </h6>
+            <p class="card-text" name="date"> Published {{ article.date }} </p>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
+
+            <!-- Modal Trigger -->
+            <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#editModal" id="modalButton" data-id="{{ article.id }}">Edit Article</button>
           </div>
         </div>
       </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}
