@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block article-content %}
-<!-- Bootstrap Modal -->
+<!-- Edit Modal -->
 <div id="editModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -37,6 +37,7 @@
     </div>
   </div>
 </div>
+
 <div id="articleList">
   <h2 class="my-3">All Articles</h2>
   {% for article in articles %}
@@ -47,10 +48,10 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title" name="headline"> {{ article.headline }} </h4>
-            <h6 class="card-text" name="subheading"> {{ article.subheading}} </h6>
-            <p class="card-text" name="date"> Published {{ article.date }} </p>
+            <!--<h6 class="card-text" name="subheading"> {{ article.subheading}} </h6>
+            <p class="card-text" name="date"> Published {{ article.date }} </p>-->
+            <button type="button" class="btn btn-outline-primary btn-sm" id="viewButton">View</button>
             <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
-
             <!-- Modal Trigger -->
             <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#editModal" id="modalButton" data-id="{{ article.id }}">Edit Article</button>
           </div>

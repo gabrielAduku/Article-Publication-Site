@@ -1,6 +1,7 @@
 $(document).ready(addListeners);
 
 var currentlyEditing;
+var currentlyViewing;
 
 function getCookie(name) {
     let cookieValue = null;
@@ -28,6 +29,31 @@ function addListeners()
     console.log("hello");
     currentlyEditing = $(this).closest('div[name="article"]');
   });
+  $('[id=viewButton]').on('click', function()
+  {
+    console.log("Viewed");
+    currentlyViewing = $(this).closest('div[name="article"]');
+    getArticle();
+  });
+}
+
+function getArticle()
+{
+  var articleID = currentlyViewing.data('id');
+  var articleData = {'id' : articleID}
+  $.ajax
+  ({
+      url: 'get/',
+      data: {'id' : articleID},
+      id: articleData,
+      method: 'GET',
+      success: function(data)
+      {
+        console.log(data)
+        currentlyViewing.find('[name=headline]').append(`<h6 class="card-text" name="subheading">`+data.subheading+`</h6>
+        <p class="card-text" name="date"> Published `+data.date+`</p>`);
+      }
+  });
 }
 
 function submitForm()
@@ -51,8 +77,7 @@ function submitForm()
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title" name="headline"> `+ data.article.headline +` </h4>
-                  <h6 class="card-text" name="subheading"> ` + data.article.subheading + ` </h6>
-                  <p class="card-text" name="date"> Published ` + data.article.date + `</p>
+                  <button type="button" class="btn btn-outline-primary btn-sm" id="viewButton">View</button>
                   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteButton">Delete</button>
 
                   <!-- Modal Trigger -->

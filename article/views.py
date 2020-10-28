@@ -8,6 +8,13 @@ from django.forms.models import model_to_dict
 from .forms import *
 import json
 
+def articleGet(request):
+    if request.method == "GET":
+        article = Article.objects.get(pk=request.GET['id'])
+
+        return JsonResponse({'headline' : article.headline, 'subheading' : article.subheading, 'date' : article.date}, status=200)
+
+
 class ArticleList(View):
     def get(self, request):
         articleForm = ArticleForm()
@@ -33,6 +40,7 @@ class ArticleDelete(View):
 class ArticleEdit(View):
     def put(self, request, id):
         putParam = QueryDict(request.body)
+        print(putParam)
         h = putParam.__getitem__('headline')
         s = putParam.__getitem__('subheading')
         d = putParam.__getitem__('date')
